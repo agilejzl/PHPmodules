@@ -21,13 +21,14 @@ return [
             // 日志记录方式
             'type'           => 'File',
             // 日志保存目录
-            'path'           => '',
+            'path'           => root_path() . 'runtime/log/',
+            // 单文件日志写入
             // 单文件日志写入
             'single'         => false,
             // 独立日志级别
-            'apart_level'    => [],
+            'apart_level'    => ['error','sql'],
             // 最大日志文件数量
-            'max_files'      => 0,
+            'max_files'      => 14,
             // 使用JSON格式记录
             'json'           => false,
             // 日志处理
