@@ -21,7 +21,7 @@ class LogHelper
 
     public static function shouldLog($logLevel) {
         $minLevel = Env::get('LOG_LEVEL');
-        if (empty($minLevel)) $minLevel = self::LEVEL_INFO;
+        if (empty($minLevel)) $minLevel = self::LEVEL_DEBUG;
         if (isset(self::LEVELS[$logLevel])) {
             return self::LEVELS[$logLevel] >= self::LEVELS[$minLevel];
         } else {
