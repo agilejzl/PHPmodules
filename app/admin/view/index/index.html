@@ -1,0 +1,29 @@
+<h3>
+    <a href="/">Home Page</a>
+</h3>
+
+<table>
+<tbody>
+    <tr>
+        <th>当前环境</th>
+        <td>{$env}</td>
+    </tr>
+    <tr>
+        <th>数据库</th>
+        <td>{$database}</td>
+    </tr>
+
+    <tr>
+        <th>网站主页</th>
+        <td><a href="{$web_front_host}">{$web_front_host}</a></td>
+    </tr>
+    <tr>
+        <th>当前时区</th>
+        <td>{$default_timezone}</td>
+    </tr>
+    <tr>
+        <th>代码分支</th>
+        <td><?php echo $lastGit ?></td>
+    </tr>
+</tbody>
+</table>

@@ -11,10 +11,11 @@ return [
     // 是否启用路由
     'with_route'       => true,
     // 默认应用
-    'default_app'      => 'index',
+    'default_app'      => 'web',
     // 默认时区
     'default_timezone' => 'Asia/Shanghai',
 
+    'auto_multi_app' => true,
     // 应用映射（自动多应用模式有效）
     'app_map'          => [],
     // 域名绑定（自动多应用模式有效）

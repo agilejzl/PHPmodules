@@ -24,6 +24,7 @@
         "topthink/framework": "^6.0",
         "topthink/think-view": "^1.0",
         "topthink/think-orm": "^2.0",
+        "topthink/think-multi-app": "^1.0",
         "topthink/think-worker": "^3.0"
     },
     "require-dev": {
