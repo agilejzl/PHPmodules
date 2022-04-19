@@ -21,6 +21,7 @@
     ],
     "require": {
         "php": ">=7.2.5",
+        "aliyuncs/oss-sdk-php": "^2.3",
         "topthink/framework": "^6.0",
         "topthink/think-view": "^1.0",
         "topthink/think-orm": "^2.0",
