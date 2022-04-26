@@ -1,56 +1,71 @@
-ThinkPHP 6.0
+PHPmodules
 ===============
 
-> 运行环境要求PHP7.2+，兼容PHP8.1
-
-[官方应用服务市场](https://market.topthink.com) | [`ThinkAPI`——官方统一API服务](https://docs.topthink.com/think-api)
-
-ThinkPHPV6.0版本由[亿速云](https://www.yisu.com/)独家赞助发布。
-
-## 主要新特性
-
-* 采用`PHP7`强类型（严格模式）
-* 支持更多的`PSR`规范
-* 原生多应用支持
-* 更强大和易用的查询
-* 全新的事件系统
-* 模型事件和数据库事件统一纳入事件系统
-* 模板引擎分离出核心
-* 内部功能中间件化
-* SESSION/Cookie机制改进
-* 对Swoole以及协程支持改进
-* 对IDE更加友好
-* 统一和精简大量用法
-
-## 安装
-
+## 项目环境安装
 ~~~
-composer create-project topthink/think tp 6.0.*
+composer install
 ~~~
 
-如果需要更新框架使用
-~~~
-composer update topthink/framework
-~~~
+## 主要模块目录 extend/core
 
-## 文档
+* LogHelper
+业务日志记录模块，支持以下主要功能  
+  1. 区分业务类型，分别记录到不同的日志文件，方便后续追踪问题状况  
+  2. 可配置最低日志级别，低于该级别不会写入到日志，默认的 LOG_LEVEL 为 INFO级别  
+  3. 可记录异常的详细信息，代码行、堆栈信息，使用示范   
+```php
 
-[完全开发手册](https://www.kancloud.cn/manual/thinkphp6_0/content)
+        $errInfo = LogHelper::detailError($e, true); 
+        LogHelper::logDebug($errInfo, LogHelper::LEVEL_ERROR); 
+``` 
 
-## 参与开发
+* SysConfHelper
+  获取系统配置参数  
+  1. getSysConf支持获取 config目录下所有配置文件，可返回单个 或者 数组节点  
+  2. getEnvConf支持获取 .env文件的单个配置参数  
+  使用示范  
+```php
 
-请参阅 [ThinkPHP 核心框架包](https://github.com/top-think/framework)。
+        SysConfHelper::currEnv();  
+        SysConfHelper::getEnvConf('oss')
+```   
 
-## 版权信息
+* TimeHelper&TimerWorker
+  1. 判断当前时间是否在指定的小时、分钟、秒钟内，可用于精确定时任务的时间，使用示范在 app\worker\TimerWorker
+  2. 支持抢购业务逻辑，抢购时间开启的误差在1秒内，示范如下  
+ ```php
 
-ThinkPHP遵循Apache2开源协议发布，并提供免费使用。
+        $timeStr = $grabTime->format('H:i:s');
+        $timeArr = explode(':', $timeStr);
+        if (TimeHelper::isInMinutes($timeArr[0], $timeArr[1], $timeArr[1]+1, false)
+            && TimeHelper::isInSeconds($timeArr[2], $timeArr[2]+1)) {
+            LogHelper::logSpider("Timer4: 现在是 ".$timeStr."，开启抢购!");
+        }
+```
+* OssHelper
+阿里云OSS操作工具
+  1. 提供了单一客户端实例模式
+  2. 封装了常用方法，比如文件上传、文件签名、文件下载
+使用示范   
+```php
 
-本项目包含的第三方源码和二进制文件之版权信息另行标注。
+        OssHelper::ossUpload($remoteDir, $remoteFilePath, $this->tempFilePath()); 
+```
 
-版权所有Copyright © 2006-2021 by ThinkPHP (http://thinkphp.cn)
+* BaseUploader
+文件上传工具
+  1.  可分别为各个上传指定各项参数
+  2. 上传后可存储为文件、OSS、AWS S3等等，具体由对应的云存储组件，比如 OssHelper 提供支持
+ ```php
 
-All rights reserved。
-
-ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
-
-更多细节参阅 [LICENSE.txt](LICENSE.txt)
+        $avatarUploadConf = [
+            'storage' => 'file',
+            'allowedExts' => 'png,jpg',
+            'storeDir' => '/avatars',
+            'delTempFile' => true,
+            'maxSize' => 1024 * 1024 * 1024
+        ];
+        $file = request()->file('avatar');
+        $uploader = new BaseUploader($avatarUploadConf);
+        $uploader->upload($file);
+```
