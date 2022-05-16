@@ -27,13 +27,13 @@ class Index extends BaseController
         $avatarUploadConf = [
             'storage' => 'file',
             'allowedExts' => 'png,jpg',
-            'storeDir' => '/avatars',
+            'storeDir' => 'avatars',
             'delTempFile' => true,
             'maxSize' => 1024 * 1024 * 1024
         ];
         $file = request()->file('avatar');
-        dump($file);
         $uploader = new BaseUploader($avatarUploadConf);
         $uploader->upload($file);
+        dump('文件上传在：' . $uploader->filePath());
     }
 }
