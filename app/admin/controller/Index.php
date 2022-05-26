@@ -2,12 +2,15 @@
 namespace app\admin\controller;
 
 use app\admin\BaseController;
+use core\helper\CpuTester;
 use core\helper\SysConfHelper;
 use think\facade\View;
 
 class Index extends BaseController {
     public function index()
     {
+        $CPUScore =  (new CpuTester(2000000))->runScore();
+        View::assign('CPUScore', $CPUScore);
         View::assign('env', SysConfHelper::currEnv());
         View::assign('web_front_host', SysConfHelper::getSysConf('web_front_host'));
         View::assign('default_timezone', SysConfHelper::getEnvConf('app.default_timezone'));
