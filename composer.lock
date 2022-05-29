@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd3a2fd02c8ad7e34e56106b40f3e014",
+    "content-hash": "b34b3d91d7d1ab6bd19cb167fadc495c",
     "packages": [
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -750,8 +750,7 @@
             "require": {
                 "ext-fileinfo": "*",
                 "topthink/framework": "^6.0.0",
-                "workerman/gateway-worker": "^3.0.0",
-                "workerman/workerman": "^3.5.23"
+                "workerman/gateway-worker": "^3.0.0"
             },
             "type": "library",
             "extra": {
@@ -802,9 +801,6 @@
                 "reference": "a615036c482d11f68b693998575e804752ef9068",
                 "shasum": ""
             },
-            "require": {
-                "workerman/workerman": ">=3.5.0"
-            },
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -837,21 +833,52 @@
             "time": "2021-12-23T13:13:09+00:00"
         },
         {
-            "name": "workerman/workerman",
-            "version": "v3.5.31",
+            "name": "workerman/redis",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/walkor/Workerman.git",
-                "reference": "b73ddc45b3c7299f330923a2bde23ca6e974fd96"
+                "url": "https://github.com/walkor/redis.git",
+                "reference": "13aa4a9bfeec3cdd4db8e663a4058742ee9cb908"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/walkor/Workerman/zipball/b73ddc45b3c7299f330923a2bde23ca6e974fd96",
-                "reference": "b73ddc45b3c7299f330923a2bde23ca6e974fd96",
+                "url": "https://api.github.com/repos/walkor/redis/zipball/13aa4a9bfeec3cdd4db8e663a4058742ee9cb908",
+                "reference": "13aa4a9bfeec3cdd4db8e663a4058742ee9cb908",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Workerman\\Redis\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "homepage": "http://www.workerman.net",
+            "support": {
+                "issues": "https://github.com/walkor/redis/issues",
+                "source": "https://github.com/walkor/redis/tree/v1.0.8"
+            },
+            "time": "2022-04-04T07:37:45+00:00"
+        },
+        {
+            "name": "workerman/workerman",
+            "version": "v4.0.37",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/walkor/workerman.git",
+                "reference": "17937eb74526adc583a0217ba842e91d6d792576"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/walkor/workerman/zipball/17937eb74526adc583a0217ba842e91d6d792576",
+                "reference": "17937eb74526adc583a0217ba842e91d6d792576",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "php": ">=5.4"
             },
             "suggest": {
                 "ext-event": "For better performance. "
@@ -887,7 +914,17 @@
                 "source": "https://github.com/walkor/workerman",
                 "wiki": "http://doc.workerman.net/"
             },
-            "time": "2020-08-24T03:49:23+00:00"
+            "funding": [
+                {
+                    "url": "https://opencollective.com/workerman",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/walkor",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-05-15T14:22:57+00:00"
         }
     ],
     "packages-dev": [

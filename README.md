@@ -6,7 +6,7 @@ PHPmodules
 composer install
 ~~~
 
-## 主要模块目录 extend/core
+## 主要模块目录 extend/core 和 app/worker
 
 * LogHelper
 业务日志记录模块，支持以下主要功能  
@@ -30,7 +30,9 @@ composer install
         SysConfHelper::getEnvConf('oss')
 ```   
 
-* TimeHelper&TimerWorker
+* 定时任务&Redis消息队列   
+  基于 Workerman 实现 TimerWorker、SubscribeWorker (Redis存储)，同时封装了 TimeHelper 等等。   
+  Worker 启动命令： ```php think worker:server```, 然后可通过日志 runtime/log/spider.log 查看任务执行记录
   1. 判断当前时间是否在指定的小时、分钟、秒钟内，可用于精确定时任务的时间，使用示范在 app\worker\TimerWorker
   2. 支持抢购业务逻辑，抢购时间开启的误差在1秒内，示范如下  
  ```php

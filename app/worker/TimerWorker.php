@@ -1,4 +1,7 @@
 <?php
+/**
+ * Server启动命令：php think worker:server
+ */
 namespace app\worker;
 
 use core\helper\LogHelper;
@@ -8,7 +11,13 @@ use Workerman\Lib\Timer;
 
 class TimerWorker extends Server {
 
+    /**
+     * 实现 onWorkerStart
+     * @param $worker
+     * @throws \Exception
+     */
     public function onWorkerStart($worker) {
+        LogHelper::logSpider("onWorkerStart");
         Timer::add(60*3, [self::class, 'monitorServer']);
         Timer::add(60*5, [self::class, 'runAtHour']);
         Timer::add(60-1, [self::class, 'runAtMinutes']);
@@ -20,6 +29,9 @@ class TimerWorker extends Server {
         Timer::add(1, function()use($worker, $grabTime) {
             self::onTimeGrab($grabTime);
         });
+
+        SubscribeWorker::instance()->subscribe();
+        SubscribeWorker::instance()->send();
     }
 
     public static function onTimeGrab($grabTime) {
